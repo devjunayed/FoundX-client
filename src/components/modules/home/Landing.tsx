@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
 import { SearchIcon } from "../../icons";
 
 export default function Landing() {

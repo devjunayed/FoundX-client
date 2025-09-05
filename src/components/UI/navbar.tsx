@@ -6,18 +6,17 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
-import { link as linkStyles } from "@nextui-org/theme";
+} from "@heroui/navbar";
+import { Button } from "@heroui/button";
+import { Kbd } from "@heroui/kbd";
+import { Link } from "@heroui/link";
+import { Input } from "@heroui/input";
+import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-
+import { Logo, SearchIcon } from "../icons";
+import { ThemeSwitch } from "./theme-switch";
 import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "@/src/components/UI/theme-switch";
-import { SearchIcon, Logo } from "@/src/components/icons";
 
 export const Navbar = () => {
   const searchInput = (
@@ -91,8 +90,8 @@ export const Navbar = () => {
                   index === 2
                     ? "primary"
                     : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
+                      ? "danger"
+                      : "foreground"
                 }
                 href="#"
                 size="lg"
