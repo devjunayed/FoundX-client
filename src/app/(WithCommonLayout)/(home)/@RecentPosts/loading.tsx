@@ -4,7 +4,7 @@ import Container from "@/src/components/UI/Container";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 
-export default async function LoadingPage() {
+export default function LoadingPage() {
 
 
   return (
@@ -16,7 +16,7 @@ export default async function LoadingPage() {
           </p>
         </div>
         <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-4">
-          {[...Array(1)].map((item: any, index: number) => (
+          {[...Array(8)].map((item: any, index: number) => (
             <div key={index}>
               <CardLoading  />
             </div>

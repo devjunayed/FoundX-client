@@ -7,7 +7,6 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@heroui/navbar";
-import { Button } from "@heroui/button";
 import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
 import { Input } from "@heroui/input";
@@ -17,6 +16,14 @@ import clsx from "clsx";
 import { Logo, SearchIcon } from "../icons";
 import { ThemeSwitch } from "./theme-switch";
 import { siteConfig } from "@/src/config/site";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@heroui/dropdown";
+import { Avatar } from "@heroui/avatar";
+import NavbarDropDown from "./NavbarDropDown";
 
 export const Navbar = () => {
   const searchInput = (
@@ -73,6 +80,9 @@ export const Navbar = () => {
       >
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
+        </NavbarItem>
+        <NavbarItem >
+          <NavbarDropDown />
         </NavbarItem>
       </NavbarContent>
 

@@ -19,10 +19,8 @@ export default async function RecentPosts() {
           </p>
         </div>
         <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-4">
-          {posts.map((item: any, index: number) => (
-            <div key={index}>
-              <Card post={item} />
-            </div>
+          {posts.slice(0, 8).map((item: any, index: number) => (
+              <Card key={item._id} post={item} />
           ))}
         </div>
         <div className="flex justify-center">

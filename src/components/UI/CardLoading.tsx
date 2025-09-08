@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@heroui/button";
 import {
   Card as NextUiCard,
   CardFooter,
