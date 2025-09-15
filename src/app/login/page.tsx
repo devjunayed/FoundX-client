@@ -3,10 +3,12 @@
 import FXForm from "@/src/components/form/FXForm";
 
 import Link from "next/link";
+import {zodResolver} from "@hookform/resolvers/zod"
 
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Button } from "@heroui/button";
 import FXInput from "@/src/components/form/FXInput";
+import { loginValidationSchema } from "@/src/schemas/login.schema";
 
 const LoginPage = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -20,7 +22,7 @@ const LoginPage = () => {
       <div className="w-[35%]">
         <FXForm
           onSubmit={onSubmit}
-  
+          resolver={zodResolver(loginValidationSchema)}
         >
           <div className="py-3">
             <FXInput name="email" label="Email" type="email" />
