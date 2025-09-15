@@ -2,16 +2,16 @@
 
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
+import { useUserRegistration } from "@/src/hooks/auth.hook";
 import registerValidationSchema from "@/src/schemas/register.schema";
-import { registerUser } from "@/src/services/AuthService";
 import { Button } from "@heroui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useEffect } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export default function RegisterPage() {
 
+  const {mutate: handleRegister, isPending} = useUserRegistration();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const userData = {
@@ -21,10 +21,12 @@ export default function RegisterPage() {
     };
 
     console.log("Inside form user data: ", userData);
-    await registerUser(userData);
+    handleRegister(userData);
   };
 
-  
+  if(isPending){
+    return <div>Registering...</div>
+  }
 
   return (
     <div className="flex h-[calc(100vh-100px)] flex-col items-center justify-center">
