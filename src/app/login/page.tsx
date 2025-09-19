@@ -11,12 +11,23 @@ import FXInput from "@/src/components/form/FXInput";
 import { loginValidationSchema } from "@/src/schemas/login.schema";
 import { useUserLogin } from "@/src/hooks/auth.hook";
 import { Spinner } from "@heroui/react";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const LoginPage = () => {
-  const { mutate: handleLogin, isPending } = useUserLogin();
+  const { mutate: handleLogin, isPending, isSuccess } = useUserLogin();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const redirectPath = searchParams.get("redirect") || "/";
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleLogin(data);
   };
+
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      router.push(redirectPath);
+    }
+  }, [isSuccess, isPending]);
 
   return (
     <>

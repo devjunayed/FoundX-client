@@ -1,4 +1,5 @@
 "use client";
+import { logoutUser } from "@/src/services/AuthService";
 import { Avatar } from "@heroui/avatar";
 import {
   Dropdown,
@@ -29,7 +30,8 @@ const NavbarDropDown = () => {
         <DropdownItem key="create-post" onClick={() => handleNavigation("/profile/create-post")}>
           Create Post
         </DropdownItem>
-        <DropdownItem key="delete" className="text-danger" color="danger">
+        
+        <DropdownItem onClick={() => logoutUser()} key="delete" className="text-danger" color="danger">
           Logout
         </DropdownItem>
       </DropdownMenu>
