@@ -16,3 +16,15 @@ export const registerUser = async (formData: FieldValues) => {
     throw new Error(error.message || "Registration failed");
  }   
 }
+export const loginUser = async (formData: FieldValues) => {
+ try {
+    const {data} = await axiosInstance.post("/auth/login", formData);
+
+    if(data.success){
+      (await cookies()).set("accessToken", data.data.accessToken);
+      (await cookies()).set("refreshToken", data.data.refreshToken);
+    }
+ } catch (error: any) {
+    throw new Error(error.message || "Registration failed");
+ }   
+}
