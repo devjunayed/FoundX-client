@@ -9,6 +9,7 @@ import {
 import { HeroUIProvider } from "@heroui/system";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import { UserProvider } from "@/src/context/user.provider";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -22,10 +23,12 @@ export function Providers({ children, themeProps }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Toaster />
-      <HeroUIProvider navigate={router.push}>
-        <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-      </HeroUIProvider>
+      <UserProvider>
+        <Toaster />
+        <HeroUIProvider navigate={router.push}>
+          <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+        </HeroUIProvider>
+      </UserProvider>
     </QueryClientProvider>
   );
 }

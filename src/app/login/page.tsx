@@ -13,19 +13,26 @@ import { useUserLogin } from "@/src/hooks/auth.hook";
 import { Spinner } from "@heroui/react";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { useUser } from "@/src/context/user.provider";
 
 const LoginPage = () => {
   const { mutate: handleLogin, isPending, isSuccess } = useUserLogin();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const redirectPath = searchParams.get("redirect") || "/";
+  const { setIsLoading: userLoading } = useUser();
+  const redirectPath = searchParams.get("redirect");
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleLogin(data);
   };
 
   useEffect(() => {
     if (!isPending && isSuccess) {
-      router.push(redirectPath);
+      userLoading(true);
+      if (redirectPath) {
+        router.push(redirectPath);
+      } else {
+        router.push("/");
+      }
     }
   }, [isSuccess, isPending]);
 

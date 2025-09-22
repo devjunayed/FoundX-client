@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -24,8 +25,10 @@ import {
 } from "@heroui/dropdown";
 import { Avatar } from "@heroui/avatar";
 import NavbarDropDown from "./NavbarDropDown";
+import { useUser } from "@/src/context/user.provider";
 
 export const Navbar = () => {
+  const { user } = useUser();
   const searchInput = (
     <Input
       aria-label="Search"
@@ -81,8 +84,8 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem >
-          <NavbarDropDown />
+        <NavbarItem>
+          {user?.email ? <NavbarDropDown /> : <Link href="/login">Login</Link>}
         </NavbarItem>
       </NavbarContent>
 
