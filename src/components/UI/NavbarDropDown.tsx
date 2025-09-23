@@ -13,7 +13,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const NavbarDropDown = () => {
   const router = useRouter();
-  const { user, setIsLoading } = useUser();
+  const { user, handleUser } = useUser();
   const pathname = usePathname();
 
   const handleNavigation = (pathname: string) => {
@@ -22,7 +22,7 @@ const NavbarDropDown = () => {
 
   const handleLogout = () => {
     logoutUser();
-    setIsLoading(true)
+    handleUser()
     if (protectedRoutes.some((route) => pathname.match(route))) {
       router.push("/");
     }

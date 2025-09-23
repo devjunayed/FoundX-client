@@ -19,7 +19,7 @@ const LoginPage = () => {
   const { mutate: handleLogin, isPending, isSuccess } = useUserLogin();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { setIsLoading: userLoading } = useUser();
+  const { handleUser} = useUser();
   const redirectPath = searchParams.get("redirect");
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleLogin(data);
@@ -35,14 +35,14 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (!isPending && isSuccess) {
-      userLoading(true);
+      handleUser();
       if (redirectPath) {
         router.push(redirectPath);
       } else {
         router.push("/");
       }
     }
-  }, [isSuccess, isPending]);
+  }, [isSuccess, isPending, handleUser]);
 
   return (
     <>
