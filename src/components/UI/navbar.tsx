@@ -26,6 +26,7 @@ import {
 import { Avatar } from "@heroui/avatar";
 import NavbarDropDown from "./NavbarDropDown";
 import { useUser } from "@/src/context/user.provider";
+import { Button } from "@heroui/button";
 
 export const Navbar = () => {
   const { user } = useUser();
@@ -85,7 +86,7 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem>
-          {user?.email ? <NavbarDropDown /> : <Link href="/login">Login</Link>}
+          {user?.email ? <NavbarDropDown /> : <Link href="/login"><Button>Login</Button></Link>}
         </NavbarItem>
       </NavbarContent>
 

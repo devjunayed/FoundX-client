@@ -34,7 +34,6 @@ export const loginUser = async (formData: FieldValues) => {
 export const logoutUser = async () => {
   (await cookies()).delete("accessToken");
   (await cookies()).delete("refreshToken");
-  redirect("/login");
 };
 
 export const getCurrentUser = async () => {

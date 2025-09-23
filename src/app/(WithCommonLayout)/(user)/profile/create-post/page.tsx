@@ -30,7 +30,7 @@ const CreatePostPage = () => {
     console.log(formValue);
   };
 
-  return (
+  return (  
     <div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
