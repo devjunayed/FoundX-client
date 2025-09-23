@@ -22,14 +22,18 @@ export async function middleware(request: NextRequest) {
 
   const user = await getCurrentUser();
 
-
-
   if (!user) {
     if (AuthRoutes.includes(pathname)) {
       return NextResponse.next();
     } else {
-      return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));
+      return NextResponse.redirect(
+        new URL(`/login?redirect=${pathname}`, request.url)
+      );
     }
+  }
+
+  if (user && AuthRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   if (user?.role && roleBasedRoutes[user?.role as Role]) {

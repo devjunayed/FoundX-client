@@ -25,6 +25,14 @@ const LoginPage = () => {
     handleLogin(data);
   };
 
+
+  const handleQuickLogin = () => {
+    handleLogin({
+      email: "mir@gmail.com",
+      password: "123456"
+    })
+  }
+
   useEffect(() => {
     if (!isPending && isSuccess) {
       userLoading(true);
@@ -64,6 +72,13 @@ const LoginPage = () => {
               type="submit"
             >
               Login
+            </Button>
+            <Button
+              className="my-3 w-full rounded-md bg-amber-200 font-semibold text-default"
+              size="lg"
+              onPress={() => handleQuickLogin()}
+            >
+              Quick Login
             </Button>
           </FXForm>
           <div className="text-center">

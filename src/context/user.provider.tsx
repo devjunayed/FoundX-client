@@ -17,6 +17,7 @@ interface IUserProviderValues {
   isLoading: boolean;
   setUser: (user: IUser | null) => void;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  handleUser: () => void;
 }
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
@@ -36,7 +37,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, [isLoading]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
+    <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading, handleUser }}>
       {children}
     </UserContext.Provider>
   );
