@@ -7,7 +7,13 @@ interface IDateToIso {
   month: number;
   year: number;
 }
-const dateToIso = ({ day, month, year }: IDateToIso) => {
+const dateToIso = (date: IDateToIso) => {
+  if (!date) {
+    return new Date().toISOString();
+  }
+
+  const { day, month, year } = date;
+
   return new Date(`${month}-${day}-${year}`).toISOString();
 };
 

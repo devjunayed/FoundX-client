@@ -1,7 +1,9 @@
 "use client";
 import FXDatePicker from "@/src/components/form/FXDatePicker";
 import FXInput from "@/src/components/form/FXInput";
+import FXSelect from "@/src/components/form/FXSelect";
 import dateToIso from "@/src/utils/dateToIso";
+import { allDistict } from "@bangladeshi/bangladesh-address";
 import { Button, Divider } from "@heroui/react";
 import React from "react";
 import {
@@ -11,6 +13,11 @@ import {
   useForm,
 } from "react-hook-form";
 import { MdDelete } from "react-icons/md";
+
+const cityOptions = allDistict()
+  .sort()
+  .map((city: string) => ({ key: city, label: city }));
+
 const CreatePostPage = () => {
   const methods = useForm();
 
@@ -27,9 +34,9 @@ const CreatePostPage = () => {
       questions: data.questions.map(
         (question: { value: string }) => question.value
       ),
-      dateFound: dateToIso(data.dateFound)
+      dateFound: dateToIso(data.dateFound),
     };
-    console.log(formValue); 
+    console.log(formValue);
   };
 
   return (
@@ -46,7 +53,7 @@ const CreatePostPage = () => {
               </div>
               <div className="flex gap-4">
                 <FXInput label="Location" name="location" />
-                <FXInput label="City" name="city" />
+                <FXSelect options={cityOptions} label="City" name="city" />
               </div>
               <div className="flex gap-4">
                 <FXInput label="Category" name="category" />
@@ -60,7 +67,7 @@ const CreatePostPage = () => {
               <h1>Owner verification questions</h1>
               <Button onPress={() => append({ value: "" })}>Append</Button>
             </div>
-          <Divider className="my-6" />
+            <Divider className="my-6" />
 
             <div className="gap-4 flex flex-col ">
               {fields.map((field, index) => (
