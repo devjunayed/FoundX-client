@@ -7,10 +7,11 @@ interface ISelect extends IInput {
     options: {
         key: string
         label: string
-    }[]
+    }[],
+    disabled?: boolean
 }
 
-const FXSelect = ({ name, label, variant = "bordered", options }: ISelect) => {
+const FXSelect = ({ name, label, variant = "bordered", options, disabled }: ISelect) => {
   const {
     register,
     formState: { errors },
@@ -23,6 +24,7 @@ const FXSelect = ({ name, label, variant = "bordered", options }: ISelect) => {
         {...register(name)}
         className="min-w-xs"
         label={label}
+        isDisabled={disabled}
       >
         {options.map((option) => (
           <SelectItem key={option.key}>{option.label}</SelectItem>

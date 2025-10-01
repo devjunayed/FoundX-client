@@ -2,6 +2,7 @@
 import FXDatePicker from "@/src/components/form/FXDatePicker";
 import FXInput from "@/src/components/form/FXInput";
 import FXSelect from "@/src/components/form/FXSelect";
+import { useGetCategories } from "@/src/hooks/categories.hook";
 import dateToIso from "@/src/utils/dateToIso";
 import { allDistict } from "@bangladeshi/bangladesh-address";
 import { Button, Divider } from "@heroui/react";
@@ -18,7 +19,21 @@ const cityOptions = allDistict()
   .sort()
   .map((city: string) => ({ key: city, label: city }));
 
-const CreatePostPage = () => {
+const CreatePostPage =  () => {
+  const { data: categoriesData, isLoading, isSuccess } =  useGetCategories();
+  console.log({categoriesData})
+
+  let categoryOptions: { key: string; label: string }[] = [];
+
+  if (categoriesData && !isLoading) {
+    categoryOptions = categoriesData.data.map(
+      (category: { _id: string; name: string }) => ({
+        key: category._id,
+        label: category.name,
+      })
+    );
+  }
+
   const methods = useForm();
 
   const { control, handleSubmit } = methods;
@@ -40,7 +55,7 @@ const CreatePostPage = () => {
   };
 
   return (
-    <div>
+    <div className="bg-default-100 p-8 rounded-xl">
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
@@ -56,7 +71,12 @@ const CreatePostPage = () => {
                 <FXSelect options={cityOptions} label="City" name="city" />
               </div>
               <div className="flex gap-4">
-                <FXInput label="Category" name="category" />
+                <FXSelect
+                  options={categoryOptions}
+                  label="Category"
+                  name="category"
+                  disabled={!isSuccess}
+                />
                 <FXInput label="Upload Image" name="uploadImage" />
               </div>
             </div>

@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="rounded-xl bg-default-100 p-2">
+      <div className="rounded-xl bg-default-100 p-8">
         <div className="min-h-[330px] w-full rounded-md">
           <Image
             className=" w-full"
