@@ -19,8 +19,9 @@ const Sidebar = () => {
             className=" w-full"
             alt="profile"
             height={100}
-            src={user?.profilePhoto as string}
+            src={`${user?.profilePhoto as string}` || "/"}
             width={100}
+            priority
           />
         </div>
         <div className="my-3">

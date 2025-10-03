@@ -13,7 +13,6 @@ const FXInput = ({
     name
 }: IProps) => {
     const {register, formState: {errors}} = useFormContext();
-    console.log(errors)
   return (
     <Input
         {...register(name)}

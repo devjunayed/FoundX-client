@@ -13,7 +13,6 @@ const FXTextArea = ({
     name
 }: IProps) => {
     const {register, formState: {errors}} = useFormContext();
-    console.log(errors)
   return (
     <Textarea
 
