@@ -1,7 +1,12 @@
-export default function page() {
+import Container from "@/src/components/UI/Container";
+import Post from "./_components/Post";
+import axiosInstance from "@/src/lib/AxiosInstance";
+
+export default async function FoundItemsPage() {
+  const {data} = await axiosInstance.get("/items");
   return (
-    <div>
-      <h1> This is Found items page </h1>
-    </div>
+    <Container>
+      <Post items={data.data}/>
+    </Container>
   );
 }

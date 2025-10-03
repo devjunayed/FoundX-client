@@ -19,19 +19,35 @@ const LoginPage = () => {
   const { mutate: handleLogin, isPending, isSuccess } = useUserLogin();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { handleUser} = useUser();
+  const { handleUser } = useUser();
   const redirectPath = searchParams.get("redirect");
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleLogin(data);
   };
 
-
-  const handleQuickLogin = () => {
-    handleLogin({
-      email: "mir@gmail.com",
-      password: "123456"
-    })
-  }
+  const handleQuickLogin = (quickUser: string) => {
+    if (quickUser === "mir") {
+      handleLogin({
+        email: "mir@gmail.com",
+        password: "123456",
+      });
+    } else if (quickUser === "junayed") {
+      handleLogin({
+        email: "junayed@gmail.com",
+        password: "123456",
+      });
+    } else if (quickUser === "sabbir") {
+      handleLogin({
+        email: "sabbir@gmail.com",
+        password: "123456",
+      });
+    } else if (quickUser === "fahim") {
+      handleLogin({
+        email: "fahim@gmail.com",
+        password: "123456",
+      });
+    }
+  };
 
   useEffect(() => {
     if (!isPending && isSuccess) {
@@ -73,13 +89,36 @@ const LoginPage = () => {
             >
               Login
             </Button>
-            <Button
-              className="my-3 w-full rounded-md bg-amber-200 font-semibold text-default"
-              size="lg"
-              onPress={() => handleQuickLogin()}
-            >
-              Quick Login
-            </Button>
+            <div className="flex gap-4">
+              <Button
+                className="my-3 w-full rounded-md bg-amber-200 font-semibold text-default"
+                size="lg"
+                onPress={() => handleQuickLogin("mir")}
+              >
+                Mir
+              </Button>
+              <Button
+                className="my-3 w-full rounded-md bg-amber-200 font-semibold text-default"
+                size="lg"
+                onPress={() => handleQuickLogin("junayed")}
+              >
+                Junayed
+              </Button>
+              <Button
+                className="my-3 w-full rounded-md bg-amber-200 font-semibold text-default"
+                size="lg"
+                onPress={() => handleQuickLogin("sabbir")}
+              >
+                Sabbir
+              </Button>
+              <Button
+                className="my-3 w-full rounded-md bg-amber-200 font-semibold text-default"
+                size="lg"
+                onPress={() => handleQuickLogin("fahim")}
+              >
+                Fahim
+              </Button>
+            </div>
           </FXForm>
           <div className="text-center">
             Don&lsquo;t have account ? <Link href={"/register"}>Register</Link>
