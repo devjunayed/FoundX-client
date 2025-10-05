@@ -14,6 +14,7 @@ import { Spinner } from "@heroui/react";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useUser } from "@/src/context/user.provider";
+import FxLoader from "@/src/components/UI/FxLoader";
 
 const LoginPage = () => {
   const { mutate: handleLogin, isPending, isSuccess } = useUserLogin();
@@ -63,9 +64,7 @@ const LoginPage = () => {
   return (
     <>
       {isPending && (
-        <div className="bg-black/10 h-screen fixed inset-0 z-[999] backdrop-blur-md items-center justify-center flex">
-          <Spinner variant="simple" size="lg" />
-        </div>
+        <FxLoader  title="Logging..."/>
       )}
       <div className="flex h-[calc(100vh-200px)] w-full flex-col items-center justify-center">
         <h3 className="my-2 text-2xl font-bold">Login with FoundX</h3>

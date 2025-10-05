@@ -1,7 +1,5 @@
 "use client";
-import { protectedRoutes } from "@/src/constant";
 import { useUser } from "@/src/context/user.provider";
-import { logoutUser } from "@/src/services/AuthService";
 import { Avatar } from "@heroui/avatar";
 import {
   Dropdown,
@@ -13,23 +11,20 @@ import { usePathname, useRouter } from "next/navigation";
 
 const NavbarDropDown = () => {
   const router = useRouter();
-  const { user, handleUser } = useUser();
+  const { user, logOut } = useUser();
   const pathname = usePathname();
 
   const handleNavigation = (pathname: string) => {
     router.push(pathname);
   };
 
-  const handleLogout = () => {
-    logoutUser();
-    handleUser()
-    if (protectedRoutes.some((route) => pathname.match(route))) {
-      router.push("/");
-    }
+  const handleLogOut = () => {
+    logOut(pathname);
   };
 
   return (
     <Dropdown>
+      
       <DropdownTrigger>
         <Avatar
           className="cursor-pointer"
@@ -59,7 +54,7 @@ const NavbarDropDown = () => {
         </DropdownItem>
 
         <DropdownItem
-          onClick={() => handleLogout()}
+          onClick={() => handleLogOut()}
           key="delete"
           className="text-danger"
           color="danger"
