@@ -20,6 +20,7 @@ import ImageGallery from "./ImageGallery";
 import { useUser } from "@/src/context/user.provider";
 import { FacebookIcon, FacebookShareButton } from "react-share";
 import FxModalShare from "@/src/components/modals/FxModalShare";
+import FxModalClaim from "@/src/components/modals/FxModalClaim";
 
 export default function Post({ items }: { items: any }) {
   const { user } = useUser();
@@ -62,12 +63,11 @@ export default function Post({ items }: { items: any }) {
           </CardBody>
           <Divider />
           <CardFooter>
-            <div className="grid grid-cols-2 justify-between w-full gap-2 ">
+            <div className={`grid ${user?.email !== item.user.email ? "grid-cols-2" : "grid-cols-1"} justify-between w-full gap-2 `}>
               {user?.email !== item.user.email && (
-                <Button className=" border border-default-400">
-                  <MdCheckCircle />
-                  Claim Request
-                </Button>
+                <div className="w-full">
+                  <FxModalClaim itemId={item._id} questions={item.questions}  />
+                  </div>
               )}
               <div className=" w-full">
                 <FxModalShare
