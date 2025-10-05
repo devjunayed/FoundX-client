@@ -10,10 +10,16 @@ import {
   Button,
 } from "@heroui/react";
 import { format } from "date-fns";
-import { MdCheckCircle, MdDateRange, MdLocationPin, MdShare } from "react-icons/md";
+import {
+  MdCheckCircle,
+  MdDateRange,
+  MdLocationPin,
+  MdShare,
+} from "react-icons/md";
 import ImageGallery from "./ImageGallery";
 import { useUser } from "@/src/context/user.provider";
 import { FacebookIcon, FacebookShareButton } from "react-share";
+import FxModalShare from "@/src/components/modals/FxModalShare";
 
 export default function Post({ items }: { items: any }) {
   const { user } = useUser();
@@ -56,19 +62,18 @@ export default function Post({ items }: { items: any }) {
           </CardBody>
           <Divider />
           <CardFooter>
-            <div className="flex justify-between w-full gap-4 ">
+            <div className="grid grid-cols-2 justify-between w-full gap-2 ">
               {user?.email !== item.user.email && (
-                <Button className="flex-1 border border-default-400">
-                    <MdCheckCircle />
-                    Claim Request</Button>
+                <Button className=" border border-default-400">
+                  <MdCheckCircle />
+                  Claim Request
+                </Button>
               )}
-              
-              <Button className="flex-1 border border-default-400">
-                <MdShare />
-                Share</Button>
-                <FacebookShareButton  url="https://devjunayed.xyz" title="hello">
-                    <FacebookIcon size={32} round />
-                </FacebookShareButton>
+              <div className=" w-full">
+                <FxModalShare
+                  url={`http://localhost:3000/found-items/${item._id}`}
+                />
+              </div>
             </div>
           </CardFooter>
         </Card>
