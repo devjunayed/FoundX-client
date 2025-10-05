@@ -6,9 +6,12 @@ import { FieldValues, useFormContext, useFormState } from "react-hook-form";
 import { Button } from "@heroui/button";
 import { MdCheckCircle, MdSend } from "react-icons/md";
 import FXTextArea from "../form/FXTextArea";
+import { useCreateClaimRequest } from "@/src/hooks/claimItems.hook";
+import FxLoader from "../UI/FxLoader";
 
 const FxModalClaim = ({ questions, itemId }: { questions: string[],itemId: string }) => {
   const { onOpen, onOpenChange, isOpen, onClose } = useDisclosure();
+  const {mutate: handleCreateClaim, isPending} = useCreateClaimRequest();
 
   const onSubmit = (fieldData: FieldValues) => {
     const answers = Object.keys(fieldData)
@@ -21,10 +24,11 @@ const FxModalClaim = ({ questions, itemId }: { questions: string[],itemId: strin
         answers
     }
 
-    console.log(finalData);
+    handleCreateClaim(finalData);
   };
   return (
     <div className="w-full">
+      {isPending && <FxLoader title="submiting data..." />}
       <Button
         onPress={() => onOpen()}
         className="w-full border border-default-400"
